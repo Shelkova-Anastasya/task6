@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.ServiceUser;
 
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -20,14 +19,12 @@ public class UserController {
 
     @GetMapping(value = "/")
     public String getUsers(Model model) {
-        List<User> users = serviceUser.getUsers();
-        model.addAttribute("users", users);
+        model.addAttribute("users", serviceUser.getUsers());
         return "users123";
     }
     @GetMapping(value = "/addUser")
     public String addUser(Model model){
-        User users = new User();
-        model.addAttribute("users", users);
+        model.addAttribute("users", new User());
 
         return  "userInfo";
 
@@ -41,8 +38,7 @@ public class UserController {
 
     @RequestMapping( "/updateInfo")
     public String updateUser(@RequestParam("userID") int id, Model model){
-        User user=serviceUser.getUser(id);
-        model.addAttribute("users", user);
+        model.addAttribute("users", serviceUser.getUser(id));
     return "userInfo";
 }
 
